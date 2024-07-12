@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+# This script create a file and makes it executable. If file already exist, file would only be made executable
+
+# Checks if file name is provide
+if [ -z $1 ]; then
+    echo "Provide file name"
+    exit 1
+fi
+
+# Creates new file and make executable
+if [ -e $1 ]; then
+    echo "'$1' found, executable created"
+    chmod +x $1
+ else 
+    touch $1
+    chmod +x $1
+    if [ $? -ne 0 ]; then
+        echo "Failed to create executable"
+        exit 1
+    fi
+    echo "'$1' executable was successfully created"
+fi
