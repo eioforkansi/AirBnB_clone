@@ -9,7 +9,8 @@ class TestFileStorage(unittest.TestCase):
         """Set up the test environment."""
         self.storage = FileStorage()
         self.test_file = "file.json"
-
+        FileStorage._FileStorage__file_path = self.test_file
+        FileStorage._FileStorage__objects = {}
     def tearDown(self):
         """Clean up after each test."""
         if os.path.exists(self.test_file):
