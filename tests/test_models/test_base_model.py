@@ -34,7 +34,7 @@ class TestBasemodel(unittest.TestCase):
     def test_str(self):
         my_model = BaseModel()
 
-        self.assertTrue(str(my_model).startswith("BaseModel"))
+        self.assertTrue(str(my_model).startswith('[BaseModel]'))
         self.assertIn(my_model.id, str(my_model))
         self.assertIn(str(my_model.__dict__), str(my_model))
 
