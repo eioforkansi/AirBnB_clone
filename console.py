@@ -12,6 +12,7 @@ class HBNBCommand(cmd.Cmd):
     Implementation of commands fo interpreter
     """
     prompt = "(hbnb) "
+
     def do_quit(self, arg):
         print()
         return True
@@ -19,15 +20,8 @@ class HBNBCommand(cmd.Cmd):
     def do_EOF(self, arg):
         print()
         return True
-    """
-    def do_help(self, arg):
-        if arg:
-            super().do_help(arg)
-        else:
-            cmds = ['quit', 'EOF', 'help']
-            print(" ".join(cmds))
-    """
-
+    def emptyline(self):
+        pass
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
