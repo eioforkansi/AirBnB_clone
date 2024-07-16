@@ -6,7 +6,7 @@ This module serves as the entry point into console
 """
 import uuid
 from datetime import datetime
-import  models
+import models
 
 class BaseModel():
     """
