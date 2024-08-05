@@ -8,6 +8,7 @@ This module contains the entry point of the command interpreter
 import cmd
 from models import storage
 from models.base_model import BaseModel
+from models.user import User
 
 class HBNBCommand(cmd.Cmd):
     """
@@ -15,6 +16,7 @@ class HBNBCommand(cmd.Cmd):
 
     """
     prompt = "(hbnb) "
+    classes = {"BaseModel": BaseModel, "User": User}
 
     def do_quit(self, arg):
         return True
@@ -36,11 +38,11 @@ class HBNBCommand(cmd.Cmd):
             return
 
         class_name = arg.split()[0]
-        if  class_name != "BaseModel":
+        if  class_name not in self.classes:
             print("** class doesn't exist **")
             return
 
-        instance = BaseModel()
+        instance = self.classes[class_name]()
         storage.save()
         print(instance.id)
 
@@ -54,7 +56,7 @@ class HBNBCommand(cmd.Cmd):
             return
 
         args = arg.split()
-        if args[0] != "BaseModel":
+        if args[0] not in self.classes:
             print("** class doesn't exist **")
             return
 
@@ -79,7 +81,7 @@ class HBNBCommand(cmd.Cmd):
             return
 
         args = arg.split()
-        if args[0] != "BaseModel":
+        if args[0] not in self.classes:
             print("** class doesn't exist **")
             return
 
@@ -107,9 +109,10 @@ class HBNBCommand(cmd.Cmd):
             return
 
         args = arg.split()
-        if args[0] != "BaseModel":
+        if args[0] not in self.classes:
             print("** class doesn't exist **")
             return
+
         print([str(obj) for obj in objects.values()])
 
     def do_update(self, arg):
@@ -123,7 +126,7 @@ class HBNBCommand(cmd.Cmd):
         if len(args) < 1:
             print("** class name missing **")
             return
-        elif args[0] != "BaseModel":
+        elif args[0] not in self.classes:
             print("** class doesn't exist **")
             return
         elif len(args) < 2:

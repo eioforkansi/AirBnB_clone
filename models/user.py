@@ -1,7 +1,18 @@
 #!/usr/bin/pythons3
 """
-console.py
+user.py
 
-This module serves as the entry point into console
+This module serves as User class that inherit from BaseModel.
 """
-print("Hello, World")
+from models.base_model import BaseModel
+
+
+class User(BaseModel):
+    """
+    class User that inherits from BaseModel
+    """
+    email = ""
+    password = ""
+    first_name = ""
+    last_name = ""
+
