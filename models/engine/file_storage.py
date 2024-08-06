@@ -5,6 +5,7 @@ Handles storage of instances
 
 import json
 from models.base_model import BaseModel
+from models.user import User
 
 class FileStorage():
     """
@@ -14,6 +15,15 @@ class FileStorage():
     """
     __file_path = "file.json"
     __objects = {}
+
+    def __init__(self):
+        """
+        Dictionary to map class names to class object
+        """
+        self.classes = {
+            "BaseModel": BaseModel,
+            "User": User
+        }
 
     def all(self):
         """
@@ -48,6 +58,9 @@ class FileStorage():
                     class_name, obj_id = key.split('.')
                     if class_name == "BaseModel":
                         obj = BaseModel(**value)
+                        FileStorage.__objects[key] = obj
+                    elif class_name == "User":
+                        obj = User(**value)
                         FileStorage.__objects[key] = obj
 
 
