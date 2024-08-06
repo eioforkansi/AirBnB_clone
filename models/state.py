@@ -5,7 +5,7 @@ state.py
 This module serves as State class and inherits from BaseModel
 """
 
-from base_model import BaseModel
+from models.base_model import BaseModel
 
 class State(BaseModel):
     name = ""

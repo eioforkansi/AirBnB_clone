@@ -5,7 +5,7 @@ city.py
 This module serves as City class and inherits from BaseModel
 """
 
-from base_model import BaseModel
+from models.base_model import BaseModel
 
 class City(BaseModel):
     state_id = ""

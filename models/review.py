@@ -5,7 +5,7 @@ city.py
 This module serves as Review class and inherits from BaseModel
 """
 
-from base_model import BaseModel
+from models.base_model import BaseModel
 
 class Review(BaseModel):
     place_id = ""
