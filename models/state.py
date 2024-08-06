@@ -1,7 +1,14 @@
 #!/usr/bin/pythons3
 """
-console.py
+state.py
 
-This module serves as the entry point into console
+This module serves as State class and inherits from BaseModel
 """
-print("Hello, World")
+
+from base_model import BaseModel
+
+class State(BaseModel):
+    name = ""
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)

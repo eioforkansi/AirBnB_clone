@@ -1,7 +1,16 @@
 #!/usr/bin/pythons3
 """
-console.py
+city.py
 
-This module serves as the entry point into console
+This module serves as Review class and inherits from BaseModel
 """
-print("Hello, World")
+
+from base_model import BaseModel
+
+class Review(BaseModel):
+    place_id = ""
+    user_id = ""
+    text = ""
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)

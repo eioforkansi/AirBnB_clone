@@ -1,7 +1,15 @@
 #!/usr/bin/pythons3
 """
-console.py
+city.py
 
-This module serves as the entry point into console
+This module serves as City class and inherits from BaseModel
 """
-print("Hello, World")
+
+from base_model import BaseModel
+
+class City(BaseModel):
+    state_id = ""
+    name = ""
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
