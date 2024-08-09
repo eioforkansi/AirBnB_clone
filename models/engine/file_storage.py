@@ -6,6 +6,11 @@ Handles storage of instances
 import json
 from models.base_model import BaseModel
 from models.user import User
+from models.place import Place
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.review import Review
 
 class FileStorage():
     """
@@ -22,7 +27,12 @@ class FileStorage():
         """
         self.classes = {
             "BaseModel": BaseModel,
-            "User": User
+            "User": User,
+            "Place": Place,
+            "State": State,
+            "City": City,
+            "Amenity": Amenity,
+            "Review": Review
         }
 
     def all(self):
@@ -56,13 +66,8 @@ class FileStorage():
                 obj_dict = json.load(file)
                 for key, value in obj_dict.items():
                     class_name, obj_id = key.split('.')
-                    if class_name == "BaseModel":
-                        obj = BaseModel(**value)
-                        FileStorage.__objects[key] = obj
-                    elif class_name == "User":
-                        obj = User(**value)
-                        FileStorage.__objects[key] = obj
-
+                    obj = classes[class_name](**value)
+                    FileStorage.__objects[key] = obj
 
         except Exception:
             pass
