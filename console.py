@@ -116,9 +116,9 @@ class HBNBCommand(cmd.Cmd):
         - Based or not on the class name.
         """
 
-        objects = storage.all()
-        if not arg:
-            print([str(obj) for obj in objects.values()])
+        args = arg.split()
+        if len(args) == 0:
+            print([str(obj) for obj in storage.all().values()])
             return
 
         args = arg.split()
@@ -126,7 +126,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
             return
 
-        print([str(obj) for obj in objects.values()])
+        print([str(obj) for obj in storage.all(self.classes[args[0]]).values()])
 
     def do_update(self, arg):
         """
@@ -169,6 +169,15 @@ class HBNBCommand(cmd.Cmd):
                         pass
                     setattr(obj, attr_name, attr_value)
                     obj.save()
+
+    def default(self, arg):
+        args = arg.split(".")
+        if len(args) == 2:
+            class_name = args[0]
+            method_call = args[1]
+
+        if method_call == "all()":
+            self.do_all(class_name)
 
 
 

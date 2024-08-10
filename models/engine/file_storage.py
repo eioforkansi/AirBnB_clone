@@ -35,10 +35,12 @@ class FileStorage():
             "Review": Review
         }
 
-    def all(self):
+    def all(self, cls=None):
         """
         Returns the dictionary __objects
         """
+        if cls:
+            return {key: value for key, value in FileStorage.__objects.items() if isinstance(value, cls)}
         return FileStorage.__objects
 
     def new(self, obj):
