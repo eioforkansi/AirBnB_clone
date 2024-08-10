@@ -122,11 +122,12 @@ class HBNBCommand(cmd.Cmd):
             return
 
         args = arg.split()
-        if args[0] not in self.classes:
+        class_name = args[0]
+        if class_name not in self.classes:
             print("** class doesn't exist **")
             return
 
-        print([str(obj) for obj in storage.all(self.classes[args[0]]).values()])
+        print([str(obj) for obj in storage.all(self.classes[class_name]).values()])
 
     def do_update(self, arg):
         """
@@ -181,18 +182,26 @@ class HBNBCommand(cmd.Cmd):
 
     def default(self, arg):
         """ Overide default method """
-        args = arg.split(".")
-        if len(args) == 2:
-            class_name = args[0]
-            method_call = args[1]
+        try:
+            args = arg.split(".")
+            if len(args) == 2:
+                class_name = args[0]
+                method_call = args[1]
 
-        if method_call == "all()":
-            self.do_all(class_name)
+            if method_call == "all()":
+                self.do_all(class_name)
 
-        if method_call == "count()":
-            self.do_count(class_name)
+            if method_call == "count()":
+                self.do_count(class_name)
 
-        pass
+            if method_call.startswith("show"):
+                instance = method_call[6:-2]
+                class_name = "{} {}".format(args[0], instance)
+                self.do_show(class_name)
+
+        except Exception:
+            print("*** Command Error ***")
+            pass
 
 
 

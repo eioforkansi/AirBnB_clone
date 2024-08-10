@@ -42,7 +42,7 @@ class FileStorage():
         if cls:
             new_dict = {}
             for key, value in FileStorage.__objects.items():
-                if isinstance(value, cls):
+                if cls == value.__class__ or cls == value.__class__.__name__:
                     new_dict[key] = value
             return new_dict
         return FileStorage.__objects
