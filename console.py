@@ -170,7 +170,17 @@ class HBNBCommand(cmd.Cmd):
                     setattr(obj, attr_name, attr_value)
                     obj.save()
 
+    def do_count(self, arg):
+        """ Method that retrieve the number of instances of a class """
+        count = 0
+        for obj in storage.all(self.classes[arg]).values():
+            count += 1
+        print(count)
+
+
+
     def default(self, arg):
+        """ Overide default method """
         args = arg.split(".")
         if len(args) == 2:
             class_name = args[0]
@@ -178,6 +188,11 @@ class HBNBCommand(cmd.Cmd):
 
         if method_call == "all()":
             self.do_all(class_name)
+
+        if method_call == "count()":
+            self.do_count(class_name)
+
+        pass
 
 
 

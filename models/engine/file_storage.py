@@ -40,7 +40,11 @@ class FileStorage():
         Returns the dictionary __objects
         """
         if cls:
-            return {key: value for key, value in FileStorage.__objects.items() if isinstance(value, cls)}
+            new_dict = {}
+            for key, value in FileStorage.__objects.items():
+                if isinstance(value, cls):
+                    new_dict[key] = value
+            return new_dict
         return FileStorage.__objects
 
     def new(self, obj):
@@ -68,8 +72,9 @@ class FileStorage():
                 obj_dict = json.load(file)
                 for key, value in obj_dict.items():
                     class_name, obj_id = key.split('.')
-                    obj = classes[class_name](**value)
-                    FileStorage.__objects[key] = obj
+                    if class_name in self.classes:
+                        obj = self.classes[class_name](**value)
+                        FileStorage.__objects[key] = obj
 
         except Exception:
             pass
