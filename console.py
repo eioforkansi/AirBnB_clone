@@ -208,12 +208,12 @@ class HBNBCommand(cmd.Cmd):
 
             if method_call.startswith("update"):
                 arg = method_call[7:-1]
-                instance, attr_name, attr_value = arg.split(", ")
+                instance, dict_arg = arg.split(", ", 1)
                 instance = eval(instance)
-                attr_name = eval(attr_name)
-                attr_value = eval(attr_value)
-                class_arg = "{} {} {} {}".format(args[0], instance, attr_name, attr_value)
-                self.do_update(class_arg)
+                dict_arg = eval(dict_arg)
+                for key, value in dict_arg.items():
+                    class_arg = "{} {} {} {}".format(args[0], instance, key, value)
+                    self.do_update(class_arg)
 
 
 
