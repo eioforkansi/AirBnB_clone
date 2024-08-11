@@ -195,32 +195,31 @@ class HBNBCommand(cmd.Cmd):
                 self.do_count(class_name)
 
             if method_call.startswith("show"):
-                instance = method_call[6:-2]
-                class_name = "{} {}".format(args[0], instance)
-                self.do_show(class_name)
+                instance = method_call[5:-1]
+                instance = eval(instance)
+                class_arg = "{} {}".format(args[0], instance)
+                self.do_show(class_arg)
+
+            if method_call.startswith("destroy"):
+                instance = method_call[8:-1]
+                instance = eval(instance)
+                class_arg = "{} {}".format(args[0], instance)
+                self.do_destroy(class_arg)
+
+            if method_call.startswith("update"):
+                arg = method_call[7:-1]
+                instance, attr_name, attr_value = arg.split(", ")
+                instance = eval(instance)
+                attr_name = eval(attr_name)
+                attr_value = eval(attr_value)
+                class_arg = "{} {} {} {}".format(args[0], instance, attr_name, attr_value)
+                self.do_update(class_arg)
+
+
 
         except Exception:
-            print("*** Command Error ***")
+            print("** no command found **")
             pass
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
